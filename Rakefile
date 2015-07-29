@@ -7,7 +7,7 @@ end
 
 desc "deploy the website"
 task :deploy do
-  sh("bundle exec middleman s3_sync --force --verbose")
+  sh("bundle exec middleman s3_sync #{ENV["S3_SYNC_FORCE"] == "Y" ? "--force" : "" } --verbose")
   sh("bundle exec middleman s3_redirect")
 end
 
