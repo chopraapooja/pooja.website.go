@@ -1,0 +1,258 @@
+body.index {
+  h1 em {
+    font-weight: 800;
+  }
+
+  .section1 {
+    position: relative;
+    color: #F8F8F8;
+    font-weight: 300;
+    background-color: $blue-gray;
+
+    > .inner {
+       @include outer-container;
+       padding: 10vh 0 10vh;
+       position: relative;
+       z-index: 10;
+       min-height: 80vh;
+
+       *:first-child { margin-top: 0; } // ?
+    }
+
+    .hero-content {
+      @include span-columns(10);
+      @include shift(1);
+
+      @include media($medium-screen) {
+        @include span-columns(8 of 10);
+        @include shift(1);
+      }
+
+      & h1 {
+        font-size: 450%;
+        font-weight: 300;
+        margin-bottom: 0em;
+      }
+
+      & .hero-text {
+        margin-bottom: 2em;
+      }
+    }
+
+    .background {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 1;
+
+      background: image-url("index/section1/go-hero-team.jpg");
+      background-size: cover;
+    }
+
+    .hero-triangle {
+      width: 0px;
+      height: 0px;
+      border-style: solid;
+      border-width: 0 0 300px 200px;
+      z-index: 1;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      border-color: transparent transparent black transparent;
+    }
+
+    h1 {
+      font-weight: 300;
+      text-shadow: 1.5px 1.5px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    h2 {
+      font-weight: 400;
+      text-shadow: 1.5px 1.5px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    .view-details {
+      @include span-columns(12 of 12);
+      text-align: center;
+    
+      .arrow {
+        background: image-url("index/section1/arrow.svg");
+        background-size: cover;
+        width: 45px;
+        height: 45px;
+        display: block;
+        text-align: center;
+        margin: 0 auto 4px;
+      }
+    }
+  }
+
+  .section5 {
+    > .inner {
+      @include outer-container;
+      padding: 5vh 0;
+    }
+
+    .header, .grid {
+      @include span-columns(10);
+      @include shift(1);
+    }
+
+    .header {
+      h2 {
+        position: relative;
+      }
+
+      .super {
+        font-size: 0.5em;
+        vertical-align: super;
+      }
+
+      .joke {
+        font-size: 0.7em;
+        color: $gray;
+        font-style: italic;
+      }
+
+      p {
+        text-align:center;
+        max-width: 80%;
+        margin: 3rem auto;
+      }
+    }
+
+    .grid {
+      padding: 0 10px;
+      @include clearfix;
+
+      img {
+        box-shadow: 0 0 1rem rgba(0,0,0, 0.8);
+      }
+
+      img, .quote {
+        @include media($medium-screen) {
+          position: relative;
+          opacity: 0;
+        }
+      }
+
+      .col1 {
+        @include span-columns(7.5 of 10);
+
+        img {
+          float: left;
+          max-width: 46%;
+          clear: right;
+
+          @include media($medium-screen) {
+            max-width: 50%;
+          }
+        }
+
+        .mf {
+          margin-left: 1rem;
+          float: right;
+
+          @include media($medium-screen) {
+            margin-top: 1rem;
+            margin-left: auto;
+          }
+        }
+
+        .quote {
+          float: right;
+          background: rgba(100,94,116, 0.7);
+          margin-top: 1rem;
+          padding: 1rem;
+          font-style: italic;
+          clear: both;
+          color: #fff;
+          text-align: left;
+          font-size: 0.8rem;
+
+          @include media($medium-screen) {
+            max-width: 85%;
+            font-size: 1.2rem;
+            padding: 2rem;
+          }
+
+          cite {
+            display: block;
+            margin-top: 1rem;
+            font-weight: bold;
+          }
+        }
+      }
+
+      .col2 {
+        @include span-columns(2.5 of 10);
+
+        .refactoring {
+          margin-top: 1rem;
+
+          @include media($medium-screen) {
+            margin-top: 2rem;
+          }
+        }
+      }
+    }
+  }
+
+  .fixedNav {
+    display: none;
+    position: fixed;
+    top: 50%;
+    right: 2rem;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    z-index: 1000;
+
+    @include media($medium-screen) {
+      display: block;
+    }
+
+    li {
+      text-align: right;
+    }
+
+    a {
+      position: relative;
+      color: transparent;
+      cursor: pointer;
+      display: block;
+      font-size: 12px;
+
+      -webkit-transition: color 0.2s ease-out;
+      transition: color 0.2s ease-out;
+
+      &:hover { color: #6A6B6D; }
+
+      &.active:after {
+        background: #6A6B6D;
+        width: 10px;
+        height: 10px;
+        right: -16px;
+      }
+
+      &:after {
+        content: '';
+        display: block;
+        width: 8px;
+        height: 8px;
+        position: absolute;
+        top: 50%;
+        right: -15px;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+
+        background: #C6C7C8;
+        border-radius: 8px;
+        border: 1px solid #C0C0C0;
+
+        -webkit-transition: all 0.2s ease-out;
+      }
+    }
+  }
+}

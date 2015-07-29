@@ -1,0 +1,13 @@
+{
+  "name": "blogs-go-cd",
+  "version": "0.1.0",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-imagemin": "^0.9.4",
+    "imagemin-mozjpeg": "^5.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gocd/blogs.gocd.git"
+  }
+}

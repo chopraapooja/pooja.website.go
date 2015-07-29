@@ -1,0 +1,7 @@
+/bin/
+/.bundle/
+vendor/bundle
+/build/
+/node_modules/
+/.idea/
+.DS_Store

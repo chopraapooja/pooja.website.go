@@ -1,0 +1,220 @@
+html {
+  font-family: 'Open Sans';
+  font-weight: 400;
+  font-size: 16px;
+}
+
+p.subheading {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  font-family: $heading-font-family;
+  font-size: 1.5em;
+  line-height: 1.4;
+  margin: 1em 0 1em;
+  text-align: center;
+}
+
+.strong {
+  font-weight: bolder;
+}
+
+body, header, footer {
+  @include span-columns(12);
+}
+
+header, footer {
+  $navigation-height: 4em;
+
+  a {
+    color: $base-font-color;
+  }
+
+  .header-nav {
+    @include span-columns(12);
+
+    .logo {
+      a:hover {
+        opacity: 0.85;
+        transform: translate(0px,-0.1em);
+        -webkit-transform: translate(0px,-0.1em);
+        -moz-transform: translate(0px,-0.1em);
+        -ms-transform: translate(0px,-0.1em);
+        -o-transform: translate(0px,-0.1em);
+      }
+
+      background-size: 90%;
+      background-position: 0 12px;
+      background-repeat: no-repeat;
+
+      float: left;
+      margin-left: 1em;
+      width: 100px;
+      height: $navigation-height;
+    }
+
+    .mobile-nav-menu {
+      float: right;
+      line-height: $navigation-height;
+      padding-right: 1em;
+
+      @include media($large-screen) {
+        display: none;
+      }
+
+      .fa-bars {
+        margin-top: 0.4em;
+        color:#ffffff;
+      }
+    }
+
+    .nav-menu {
+      display: none;
+      clear: both;
+
+      @include media($large-screen) {
+        display: block;
+        float: right;
+        clear: none;
+        height: $navigation-height;
+        padding-right: 0.5em;
+      }
+
+      .nav-link {
+        display: block;
+        float: left;
+        line-height: $navigation-height;
+        Background-color: transparent;
+        font-weight: 300;
+        padding-right: 1em;
+        text-align: right;
+        width: 100%;
+
+        @include media($large-screen) {
+          padding: 0 1em;
+          width: auto;
+        }
+
+        a {
+          display: block;
+          font-size: 1.3em;
+          -webkit-transition: margin-top 0.1s; /* For Safari 3.1 to 6.0 */
+          transition: margin-top 0.1s;
+
+          &:hover {
+            margin-top: -0.1em;
+          }
+        }
+      }
+    }
+  }
+
+  &.dark {
+    .header-nav {
+      background-color: $transparent-smoke;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+
+      .logo {
+        background-image: image-url('layout/go-logo.svg');
+      }
+
+      ul.nav-menu li.nav-link a {
+        color: $light-gray;
+      }
+    }
+  }
+
+  &.light {
+    .header-nav {
+      background-color: rgba(255, 255, 255, 0.95);
+      border-bottom: 1px solid #CCC;
+
+      .logo {
+        background-image: image-url('layout/go-logo.svg');
+      }
+
+      .fa-bars {
+        color: #000;
+      }
+    }
+  }
+}
+
+header {
+  position: fixed;
+  border-top: 3px solid $pink;
+  z-index: 10;
+}
+
+footer {
+  position: relative;
+  z-index: 100;
+  background-color: #ffffff;
+  text-align: center;
+  padding: 1.25em 0 0.75em 0;
+  ul li {
+    display: inline;
+    padding: 0 .75em;
+  }
+}
+
+#content{
+  margin-top: 0;
+  position: relative;
+  z-index: 1;
+}
+
+#hero {
+  font-size: 4em;
+  font-weight: 300;
+  color: #111;
+
+  h1 {
+    width: 80%;
+    font-size: 0.67em;
+    text-align: center;
+    margin: 0 auto 1em;
+  }
+
+  h3 {
+    font-size: 0.33em;
+    line-height: 1.8;
+    width: 80%;
+    margin: 0 auto 2em;
+    text-align: center;
+  }
+
+  .background-pattern-container {
+    @include background(image-url('geometric-blur.png'));
+    position: relative;
+    background-size: cover;
+    opacity: 0.8;
+    padding: 2em 0 1em;
+  }
+
+}
+
+.hide {
+  display: none;
+}
+
+.section-wrapper {
+  @include outer-container(100%);
+  @include clearfix;
+  padding: 3em;
+  position: relative;
+  background-color: transparent;
+}
+
+#powered-by {
+  text-align: center;
+  .section-wrapper {
+    padding-bottom: 5px;
+  }
+  img {
+    width: 250px;
+    height: auto;
+  }
+}
+
+i.fa-twitter {
+  font-size: 1.3em;
+}
