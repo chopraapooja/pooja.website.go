@@ -182,6 +182,32 @@ body.index {
     }
   }
 
+  .section3 {
+    > .inner {
+      @include outer-container;
+      padding: 0 5vh;
+    }
+
+    .header {
+      font-weight: bold;
+      font-size: 150%;
+      padding-bottom: 2em;
+    }
+
+    .column {
+      padding: 5vh 0;
+
+      @include media($medium-screen) {
+        @include span-columns(6 of 12);
+      }
+
+      h4 {
+        font-weight: bold;
+        text-align: left;
+      }
+    }
+  }
+
   .section5 {
     > .inner {
       @include outer-container;
