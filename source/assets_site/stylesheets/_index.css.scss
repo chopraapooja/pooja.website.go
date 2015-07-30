@@ -206,6 +206,10 @@ body.index {
         text-align: left;
       }
     }
+
+    ul {
+      @extend %default-ul;
+    }
   }
 
   .section5 {
