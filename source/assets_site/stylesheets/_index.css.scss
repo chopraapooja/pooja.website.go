@@ -41,7 +41,7 @@ body.index {
 
     .background {
       position: absolute;
-      top: 0;
+      top: -$navigation-height;
       right: 0;
       bottom: 0;
       left: 0;
