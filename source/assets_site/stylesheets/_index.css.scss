@@ -89,6 +89,97 @@ body.index {
     }
   }
 
+  .section2 {
+    > .inner {
+      @include outer-container;
+      padding: 3vh 0;
+      @include media($medium-screen) {
+        padding: 6vh 0;
+      }
+    }
+
+    .cards {
+      position: relative;
+      @include clearfix;
+
+      .card {
+        @include span-columns(10 of 12);
+        @include shift(1);
+
+        @include media($medium-screen) {
+          @include span-columns(4 of 12);
+          @include shift(7);
+          padding: 30vh 0 30vh 0;
+        }
+
+        padding: 0 0 5vh;
+        position: relative;
+
+        .card_title, .card_text {
+          text-align: center;
+          color: $base-font-color;
+
+          @include media($medium-screen) {
+            text-align: left;
+          }
+        }
+
+        .card_title {
+          font-weight: 600;
+          text-transform: uppercase;
+        }
+
+        .card_text {
+          font-size: 0.9em;
+
+          @include media($medium-screen) {
+            font-size: 0.95em;
+          }
+
+          @include media($large-screen) {
+            font-size: 1em;
+          }
+        }
+
+        &:last-child {
+          padding-bottom: 0;
+        }
+      }
+    }
+
+    .images {
+      position: absolute;
+      left: 0;
+      right: 0;
+      display: none;
+
+      @include media($medium-screen) {
+        display: block;
+      }
+
+      > .inner {
+        position: relative;
+        max-width: 68em;
+        margin: 0 auto;
+      }
+
+      .card_image {
+        position: absolute;
+        top: 0;
+        left: 10%;
+        max-width: 50%;
+        max-height: 55vh;
+
+        @include media($medium-screen) {
+          max-width: 40%;
+          max-height: 45vh;
+        }
+
+        &:first-child { position: relative; }
+      }
+    }
+  }
+
   .section5 {
     > .inner {
       @include outer-container;
