@@ -90,6 +90,8 @@ body.index {
   }
 
   .section2 {
+    background-color: #f3f3f3;
+
     > .inner {
       @include outer-container;
       padding: 3vh 0;
@@ -148,6 +150,12 @@ body.index {
     }
 
     .images {
+      > .inner {
+        position: relative;
+        max-width: 68em;
+        margin: 0 auto;
+      }
+
       position: absolute;
       left: 0;
       right: 0;
@@ -155,12 +163,6 @@ body.index {
 
       @include media($medium-screen) {
         display: block;
-      }
-
-      > .inner {
-        position: relative;
-        max-width: 68em;
-        margin: 0 auto;
       }
 
       .card_image {
