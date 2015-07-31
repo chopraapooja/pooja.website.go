@@ -264,6 +264,21 @@ body.index {
       padding: 5vh 0;
     }
 
+    .cf_sign_on {
+      display: none;
+    }
+
+    .mktoLabel {
+      margin-bottom: 10px;
+    }
+  }
+
+  .section6 {
+    > .inner {
+      @include outer-container;
+      padding: 5vh 0;
+    }
+
     .header, .grid {
       @include span-columns(10);
       @include shift(1);
