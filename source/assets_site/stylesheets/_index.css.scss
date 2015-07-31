@@ -90,8 +90,6 @@ body.index {
   }
 
   .section2 {
-    background-color: #f3f3f3;
-
     > .inner {
       @include outer-container;
       padding: 3vh 0;
@@ -183,6 +181,9 @@ body.index {
   }
 
   .section3 {
+    background-color: #f5f5f5;
+    padding: 5vh 0;
+
     > .inner {
       @include outer-container;
       padding: 0 5vh;
@@ -191,7 +192,8 @@ body.index {
     .header {
       font-weight: bold;
       font-size: 150%;
-      padding-bottom: 2em;
+      padding: 1em 0;
+      margin-top: 0;
     }
 
     .column {
@@ -209,6 +211,50 @@ body.index {
 
     ul {
       @extend %default-ul;
+    }
+  }
+
+  .section4 {
+    padding: 8vh 0;
+
+    > .inner {
+      @include outer-container;
+      padding: 0 5vh;
+    }
+
+    .header {
+      font-weight: bold;
+      padding: 3vh 0;
+    }
+
+    .pricing {
+      .row {
+        @include fill-parent();
+        @include row(table);
+        padding: 0.5em 0;
+        text-align: center;
+
+        .number-of-pipelines {
+          @include span-columns(4 of 12);
+        }
+
+        .addons-included {
+          @include span-columns(4 of 12);
+        }
+
+        .price {
+          @include span-columns(4 of 12);
+        }
+
+        &:last-child {
+          border-bottom: transparent;
+          @include reset-display;
+        }
+
+        &:nth-child(even) {
+          background-color: #f1f1f1;
+        }
+      }
     }
   }
 
