@@ -184,6 +184,19 @@ body.index {
     background-color: #f5f5f5;
     padding: 5vh 0;
 
+    .support-triangle{
+      width: 0px;
+      height: 0px;
+      border-width: 80px 80px 80px 80px;
+      border-color: rgb(218, 122, 248) transparent transparent transparent;
+      border-style: solid;
+      z-index: 0;
+      position: absolute;
+      left: 5vw;
+      float: left;
+      margin-top: -5vh;
+    }
+
     > .inner {
       @include outer-container;
       padding: 0 5vh;
