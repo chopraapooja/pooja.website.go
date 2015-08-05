@@ -1,19 +1,10 @@
 body.support-terms {
   .section1 {
-    position: relative;
     color: #F8F8F8;
     font-weight: 300;
-    background-color: $blue-gray;
     min-height: 40vh;
 
     .background {
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      z-index: 1;
-
       background: image-url("support-terms/support.jpg");
       background-size: cover;
     }
