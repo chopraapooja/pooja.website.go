@@ -1,0 +1,35 @@
+body.support-terms {
+  .section1 {
+    position: relative;
+    color: #F8F8F8;
+    font-weight: 300;
+    background-color: $blue-gray;
+    min-height: 40vh;
+
+    .background {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 1;
+
+      background: image-url("support-terms/support.jpg");
+      background-size: cover;
+    }
+  }
+
+  .triangle {
+    width: 550px;
+    height: 0;
+    border-color: transparent transparent rgba(129, 45, 129, 0.7) transparent;
+    border-style: solid;
+    border-width: 0 200px 40vh 0;
+  }
+
+  #title {
+    position: absolute;
+    left: 1em;
+    top: 15vh;
+  }
+}
