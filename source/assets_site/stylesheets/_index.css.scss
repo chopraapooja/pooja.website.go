@@ -280,6 +280,7 @@ body.index {
     }
 
     .header {
+      position: relative;
       font-weight: bold;
       padding: 3vh 0;
       text-align: left;
@@ -291,6 +292,15 @@ body.index {
 
     .mktoLabel {
       margin-bottom: 10px;
+    }
+
+    .contactus-triangle {
+      position: absolute;
+      width: 75vw;
+      height: 0;
+      border-color: transparent transparent rgb(244, 118, 202) transparent;
+      border-style: solid;
+      border-width: 0 400px 80vh 0;
     }
   }
 
