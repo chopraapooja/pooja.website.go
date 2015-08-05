@@ -1,11 +1,11 @@
-body.support-terms {
+body.support-terms, body.events, body.help {
   .section1 {
     color: #F8F8F8;
     font-weight: 300;
     min-height: 40vh;
 
     .background {
-      background: image-url("support-terms/support.jpg");
+      background: image-url("common/support.jpg");
       background-size: cover;
     }
   }
