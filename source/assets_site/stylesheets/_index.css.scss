@@ -228,7 +228,7 @@ body.index {
   }
 
   .section4 {
-    padding: 8vh 0;
+    padding: 0 0;
 
     > .inner {
       @include outer-container;
@@ -238,6 +238,17 @@ body.index {
     .header {
       font-weight: bold;
       padding: 3vh 0;
+    }
+
+    .triangle-on-triangle {
+      float: right;
+      .equalateral-triangle {
+        width: 0;
+        height: 0;
+        border-color: transparent transparent rgb(243, 71, 151) transparent;
+        border-style: solid;
+        border-width: 0 30px 30px 30px;
+      }
     }
 
     .pricing {
@@ -300,14 +311,28 @@ body.index {
       height: 0;
       border-color: transparent transparent rgb(244, 118, 202) transparent;
       border-style: solid;
-      border-width: 0 400px 80vh 0;
+      border-width: 0 25vw 80vh 0;
     }
   }
 
   .section6 {
     > .inner {
       @include outer-container;
-      padding: 5vh 0;
+      padding: 0 0;
+    }
+
+    .CDtriangle {
+      position: relative;
+      width: 75vw;
+      height: 0;
+      border-color: transparent transparent rgb(244, 118, 202) transparent;
+      border-style: solid;
+      border-width: 0 0px 65vh 300px;
+      float: right;
+      //border: 0;
+      //margin: 0;
+      padding: 0;
+
     }
 
     .header, .grid {
