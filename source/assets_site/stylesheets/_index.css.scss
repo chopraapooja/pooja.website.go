@@ -51,6 +51,23 @@ body.index {
       background-size: cover;
     }
 
+    .hero-tri-text {
+      width: 100px;
+      background-color: transparent;
+      height: 100px;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+      stroke: transparent;
+      stroke-width: 10px;
+      align-content: center;
+    }
+
+    .hero-triangle-text {
+      color: #009926;
+    }
+
     .hero-triangle {
       width: 0px;
       height: 0px;
