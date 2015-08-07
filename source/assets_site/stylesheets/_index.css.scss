@@ -112,9 +112,9 @@ body.index {
       position: absolute;
       width: 60vw;
       height: 0;
-      border-color: transparent transparent #f5f5f5 transparent;
+      border-color: transparent transparent #f8f8f8 transparent;
       border-style: solid;
-      border-width: 0 25vw 100em 0;
+      border-width: 0 25vw 215vh 0;
     }
     > .inner {
       @include outer-container;
@@ -309,7 +309,7 @@ body.index {
   }
 
   .section5 {
-    background-color: #f5f5f5;
+    background-color: #f8f8f8;
 
     > .inner {
       @include outer-container;
@@ -342,128 +342,83 @@ body.index {
   }
 
   .section6 {
+    min-height: auto;
     > .inner {
       @include outer-container;
       padding: 0 0;
     }
 
-    .CDtriangle {
-      position: relative;
-      width: 75vw;
-      height: 0;
-      border-color: transparent transparent rgb(244, 118, 202) transparent;
-      border-style: solid;
-      border-width: 0 0px 65vh 300px;
-      float: right;
-      //border: 0;
-      //margin: 0;
-      padding: 0;
+    .left-section {
+      padding: 0 0;
+      float: left;
+      width: 50%;
+      height: auto;
 
-    }
-
-    .header, .grid {
-      @include span-columns(10);
-      @include shift(1);
-    }
-
-    .header {
-      h2 {
-        position: relative;
+      #CD-book {
+        margin: 5px;
+      }
+      #martin-fowler {
+        margin: 5px;
+      }
+      #refactoring-book {
+        margin: 5px;
       }
 
-      .super {
-        font-size: 0.5em;
-        vertical-align: super;
+      .cd-images {
+        display: inline-flex;
+      }
+
+      .foo {
+        margin: 10px;
+      }
+      .bar {
+        margin: 10px;
+        margin-bottom: 100px;
+      }
+      .baz {
+      }
+      .header {
+        float: left;
       }
 
       .joke {
+        float: left;
         font-size: 0.7em;
         color: $gray;
         font-style: italic;
       }
-
-      p {
-        text-align:center;
-        max-width: 80%;
-        margin: 3rem auto;
+      .about-TW-CD {
       }
     }
 
-    .grid {
-      padding: 0 10px;
-      @include clearfix;
-
-      img {
-        box-shadow: 0 0 1rem rgba(0,0,0, 0.8);
+    .right-section {
+      width: 50%;
+      float: right;
+      .CD-triangle {
+        width: 50vw;
+        height: 0px;
+        border-style: solid;
+        border-width: 0 0 50vw 20vw;
+        right: 0;
+        bottom: 0;
+        border-color: transparent transparent rgb(176, 44, 132) transparent;
       }
-
-      img, .quote {
-        @include media($medium-screen) {
-          position: relative;
-          opacity: 0;
-        }
+      .jez-img {
+        position: absolute;
+        right: 0;
+        padding: 15vw 5vw;
       }
-
-      .col1 {
-        @include span-columns(7.5 of 10);
-
-        img {
-          float: left;
-          max-width: 46%;
-          clear: right;
-
-          @include media($medium-screen) {
-            max-width: 50%;
-          }
-        }
-
-        .mf {
-          margin-left: 1rem;
-          float: right;
-
-          @include media($medium-screen) {
-            margin-top: 1rem;
-            margin-left: auto;
-          }
-        }
-
-        .quote {
-          float: right;
-          background: rgba(100,94,116, 0.7);
-          margin-top: 1rem;
-          padding: 1rem;
-          font-style: italic;
-          clear: both;
-          color: #fff;
-          text-align: left;
-          font-size: 0.8rem;
-
-          @include media($medium-screen) {
-            max-width: 85%;
-            font-size: 1.2rem;
-            padding: 2rem;
-          }
-
-          cite {
-            display: block;
-            margin-top: 1rem;
-            font-weight: bold;
-          }
-        }
-      }
-
-      .col2 {
-        @include span-columns(2.5 of 10);
-
-        .refactoring {
-          margin-top: 1rem;
-
-          @include media($medium-screen) {
-            margin-top: 2rem;
-          }
-        }
+      .jez-text {
+        position: absolute;
+        right: 0px;
+        padding: 10vw 4vw;
+        bottom: 0;
+        width: 45%;
+        color: white;
+        text-align: right;
       }
     }
+
   }
 
   .fixedNav {
