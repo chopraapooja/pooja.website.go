@@ -107,7 +107,13 @@ body.index {
   }
 
   .section2 {
-    background-color: rgb(244, 118, 202);
+    background: image-url("index/section2/section2-triangle.svg") no-repeat top center fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    
     .bg-triangle {
       position: absolute;
       width: 60vw;
@@ -153,10 +159,12 @@ body.index {
         .card_title {
           font-weight: 600;
           text-transform: uppercase;
+          color: white;
         }
 
         .card_text {
           font-size: 0.9em;
+          color: white;
 
           @include media($medium-screen) {
             font-size: 0.95em;
