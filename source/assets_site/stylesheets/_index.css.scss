@@ -11,7 +11,7 @@ body.index {
 
     > .inner {
        @include outer-container;
-       padding: 20vh 0 10vh;
+       padding: 22vh 0 10vh;
        position: relative;
        z-index: 10;
        min-height: 90vh;
@@ -367,6 +367,7 @@ body.index {
   }
 
   .section6 {
+    background-color: #f8f8f8;
     min-height: auto;
     > .inner {
       @include outer-container;
@@ -444,6 +445,40 @@ body.index {
       }
     }
 
+  }
+
+  .section7 {
+    .parallogram-sequence {
+      display: inline-flex;
+    }
+
+    .parallogram {
+      width: 33vw;
+      height: 22vh;
+      background: #f8f8f8;
+    }
+
+    .forward-parallogram {
+      -webkit-transform: skew(30deg);
+      -moz-transform: skew(30deg);
+      -o-transform: skew(30deg);
+      transform: skew(30deg);
+    }
+
+    .parallogram-content {
+      position: absolute;
+      z-index: 1;
+      margin: 3%;
+      max-width: 33vw;
+      max-height: 10vh;
+    }
+
+    .backward-parallogram {
+      -webkit-transform: skew(30deg);
+      -moz-transform: skew(30deg);
+      -o-transform: skew(30deg);
+      transform: skew(-30deg);
+    }
   }
 
   .fixedNav {
