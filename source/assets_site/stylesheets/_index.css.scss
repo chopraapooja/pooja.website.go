@@ -365,6 +365,7 @@ body.index {
   .section6 {
     background-color: #f8f8f8;
     min-height: auto;
+    padding-top: 2px;
 
     > .inner {
       @include outer-container;
