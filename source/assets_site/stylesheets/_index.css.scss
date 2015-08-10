@@ -315,6 +315,32 @@ body.index {
       padding: 5vh 0;
     }
 
+    .contact-us {
+      float: right;
+      position: relative;
+      left: 50%;
+      width: 500px;
+      margin-top: 15%;
+    }
+
+    .contact-medium {
+      color: rgb(244, 118, 202);
+      font-weight: bold
+    }
+
+    .market {
+      margin-left: 30%;
+      padding: 0;
+      border: 0;
+      font: inherit;
+      font-size: 100%;
+      vertical-align: baseline;
+    }
+
+    .inner {
+      display: inline-flex;
+    }
+
     .header {
       position: relative;
       font-weight: bold;
@@ -332,11 +358,11 @@ body.index {
 
     .contactus-triangle {
       position: absolute;
-      width: 75vw;
+      width: 70vw;
       height: 0;
       border-color: transparent transparent rgb(244, 118, 202) transparent;
       border-style: solid;
-      border-width: 0 25vw 80vh 0;
+      border-width: 0 25vw 85vh 0;
     }
   }
 
