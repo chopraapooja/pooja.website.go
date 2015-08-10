@@ -107,14 +107,13 @@ body.index {
   }
 
   .section2 {
-
-    .bg-triangle {
+    .section2-triangle {
       position: absolute;
       width: 60vw;
       height: 0;
-      border-color: transparent transparent #f8f8f8 transparent;
+      border-color: transparent transparent transparent rgb(138, 77, 200);
       border-style: solid;
-      border-width: 0 25vw 215vh 0;
+      border-width: 0 0 300px 200px;
     }
     > .inner {
       @include outer-container;
