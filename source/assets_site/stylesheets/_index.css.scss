@@ -315,14 +315,16 @@ body.index {
       padding: 5vh 0;
     }
 
-    .background {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      left: 0;
-      top: 0;
-      background: image-url("index/section5/background.svg");
-      background-size: cover;
+    @include media($large-screen) {
+      .background {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background: image-url("index/section5/background.svg");
+        background-size: cover;
+      }
     }
 
     .header {
@@ -332,19 +334,14 @@ body.index {
       text-align: left;
     }
 
-    .contact-us {
-      @include span-columns(4);
-      @include shift(4);
-      margin-top: 10%;
-
-      .contact-medium {
-        color: rgb(244, 118, 202);
-        font-weight: bold
-      }
-    }
-
     .marketo-form {
-      @include span-columns(4);
+      @include span-columns(10);
+      @include shift(1);
+
+      @include media($medium-screen) {
+        @include span-columns(4);
+        @include shift(1);
+      }
 
       padding: 0;
       border: 0;
@@ -358,6 +355,22 @@ body.index {
 
       .mktoLabel {
         margin-bottom: 10px;
+      }
+    }
+
+    .contact-us {
+      @include span-columns(10);
+      @include shift(1);
+
+      @include media($medium-screen) {
+        @include span-columns(4);
+        @include shift(3);
+        margin-top: 10%;
+      }
+
+      .contact-medium {
+        color: rgb(244, 118, 202);
+        font-weight: bold
       }
     }
   }
