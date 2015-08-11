@@ -45,6 +45,12 @@ if ENV['S3_BUCKET']
       cf.distribution_id = ENV['CLOUDFRONT_DISTRIBUTION']
       cf.after_build = false  # default is false
     end
+
+    # Cloudfront invalidate only changed files.
+    after_s3_sync do |files_by_status|
+      puts "Invalidating #{files_by_status[:updated].length} files from Cloudfront."
+      invalidate files_by_status[:updated]
+    end
   end
 
   caching_policy 'text/html', max_age: 0, must_revalidate: true
