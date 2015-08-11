@@ -1,4 +1,6 @@
 body.help {
+  @include sub-page-title;
+
   .trapezium-left {
     border-width: 0 10vw 30vh 0;
   }

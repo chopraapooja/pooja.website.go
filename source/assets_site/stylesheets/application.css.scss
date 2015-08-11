@@ -9,9 +9,9 @@
 @import "fonts/font-awesome.min";
 
 // our own css
+@import "mixins";
 @import "layout";
 @import "index";
 @import "help";
 @import "support-terms";
 @import "events";
-@import "subpages";
