@@ -487,36 +487,31 @@ body.index {
   }
 
   .section7 {
-    .parallogram-sequence {
-      display: inline-flex;
+    > .inner {
+      @include outer-container(100%);
     }
 
-    .parallogram {
-      width: 33vw;
-      height: 22vh;
-      background: #f8f8f8;
-    }
+    .customer {
+      padding: 5vh;
 
-    .forward-parallogram {
-      -webkit-transform: skew(30deg);
-      -moz-transform: skew(30deg);
-      -o-transform: skew(30deg);
-      transform: skew(30deg);
-    }
+      @include media($medium-screen) {
+        float: left;
+        height: 200px;
+        margin-right: 0;
+        width: 33.3%;
 
-    .parallogram-content {
-      position: absolute;
-      z-index: 1;
-      margin: 3%;
-      max-width: 33vw;
-      max-height: 10vh;
-    }
+        &:nth-child(even) {
+          background-color: white;
+        }
 
-    .backward-parallogram {
-      -webkit-transform: skew(30deg);
-      -moz-transform: skew(30deg);
-      -o-transform: skew(30deg);
-      transform: skew(-30deg);
+        &:nth-child(odd) {
+          background-color: #f8f8f8;
+        }
+
+        &.title {
+          background-color: #f36fca;
+        }
+      }
     }
   }
 
