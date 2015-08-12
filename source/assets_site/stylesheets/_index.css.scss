@@ -89,11 +89,6 @@ body.index {
       background-size: cover;
     }
 
-    h2 {
-      font-weight: 400;
-      text-shadow: 1.5px 1.5px 5px rgba(0, 0, 0, 0.5);
-    }
-
     .view-details {
       @include span-columns(12 of 12);
       text-align: center;
