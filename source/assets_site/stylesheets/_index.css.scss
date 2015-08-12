@@ -256,10 +256,11 @@ body.index {
   }
 
   .section4 {
-    padding: 0 0;
+    $container_width: 90%;
+    position: relative;
 
     > .inner {
-      @include outer-container;
+      @include outer-container($container_width);
       padding: 0 5vh;
     }
 
@@ -268,18 +269,9 @@ body.index {
       padding: 3vh 0;
     }
 
-    .triangle-on-triangle {
-      float: right;
-      .equalateral-triangle {
-        width: 0;
-        height: 0;
-        border-color: transparent transparent rgb(243, 71, 151) transparent;
-        border-style: solid;
-        border-width: 0 30px 30px 30px;
-      }
-    }
-
     .pricing {
+      padding-bottom: 8vh;
+
       .row {
         @include fill-parent();
         @include row(table);
@@ -305,6 +297,20 @@ body.index {
 
         &:nth-child(even) {
           background-color: #f1f1f1;
+        }
+      }
+    }
+
+    @include media($medium-screen) {
+      .triangle-on-triangle {
+        position: absolute;
+        bottom: 0;
+        right: 100 - $container_width;
+
+        .equalateral-triangle {
+          border-color: transparent transparent rgb(243, 71, 151) transparent;
+          border-style: solid;
+          border-width: 0 30px 30px 30px;
         }
       }
     }
