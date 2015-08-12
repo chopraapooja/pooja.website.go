@@ -34,6 +34,7 @@ if ENV['S3_BUCKET']
     config.aws_access_key_id     = ENV['S3_ACCESS_KEY']
     config.aws_secret_access_key = ENV['S3_SECRET_KEY']
     config.delete                = false
+    config.prefer_gzip           = true
     # don't s3 sync immediately after build
     config.after_build           = false
   end
@@ -60,6 +61,7 @@ end
 configure :build do
   activate :minify_css
   activate :minify_javascript
+  activate :gzip
 
   activate :asset_hash do |opts|
     opts.exts += %w(.ico)
