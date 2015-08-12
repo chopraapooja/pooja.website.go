@@ -379,81 +379,102 @@ body.index {
     background-color: #f8f8f8;
     min-height: auto;
     padding-top: 2px;
+    position: relative;
+    @include media($large-screen) {
+      > .inner {
+
+      }
+
+      .bottom {
+        display: inline-flex;
+      }
+      .background {
+        position: absolute;
+        width: 60%;
+        height: 100%;
+        right: 0;
+        top: 0;
+        background: image-url("index/section6/background.svg");
+        background-size: cover;
+      }
+      .jez-section {
+        width: 50%;
+        float: right;
+
+        #jez-quote {
+          color: white;
+          text-align: right;
+        }
+      }
+      .fowler-section {
+        width: 50%;
+      }
+      .text-portion {
+        width: 50%;
+      }
+
+      .jez-images {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      #jez-img {
+        //float: right;
+      }
+      #CD-book {
+        //float: right;
+      }
+
+    }
 
     > .inner {
       @include outer-container;
       padding: 0 0;
-    }
-
-    .left-section {
-      padding: 0 0;
-      float: left;
-      width: 50%;
-      height: auto;
-
-      #CD-book {
-        margin: 5px;
-      }
-      #martin-fowler {
-        margin: 5px;
-      }
-      #refactoring-book {
-        margin: 5px;
-      }
-
-      .cd-images {
-        display: inline-flex;
-      }
-
-      .books {
-        margin: 10px;
-      }
-      .author {
-        margin: 10px;
-        margin-bottom: 100px;
-      }
-      .baz {
-      }
-      .header {
-        float: left;
-      }
+      width: 100vw;
 
       .joke {
-        float: left;
         font-size: 0.7em;
         color: $gray;
         font-style: italic;
+        margin-bottom: 1.5em;
       }
       .about-TW-CD {
       }
-    }
+      .fowler-section {
+        position: relative;
 
-    .right-section {
-      width: 50%;
-      float: right;
-      .CD-triangle {
-        width: 50vw;
-        height: 0px;
-        border-style: solid;
-        border-width: 0 0 50vw 20vw;
-        right: 0;
-        bottom: 0;
-        border-color: transparent transparent rgb(176, 44, 132) transparent;
+        #fowler-img {
+          max-width: 45%;
+          margin: 2%;
+        }
+        #refactoring-book {
+          max-width: 45%;
+          margin: 2%;
+        }
       }
-      .jez-img {
-        position: absolute;
-        right: 0;
-        padding: 15vw 5vw;
+
+      .jez-section {
+        position: relative;
+        max-width: 100vw;
+        #jez-img {
+          max-width: 45%;
+          margin: 2%;
+        }
+        #CD-book {
+          max-width: 45%;
+          margin: 2%;
+        }
+        #jez-quote {
+          text-align: right;
+          padding: 1em;
+        }
       }
-      .jez-text {
-        position: absolute;
-        right: 0px;
-        padding: 10vw 4vw;
-        bottom: 0;
-        width: 45%;
-        color: white;
-        text-align: right;
+
+      .text-portion {
+        text-align: center;
       }
+
     }
 
   }
