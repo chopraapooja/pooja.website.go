@@ -106,14 +106,6 @@ body.index {
   }
 
   .section2 {
-    .section2-triangle {
-      position: absolute;
-      width: 60vw;
-      height: 0;
-      border-color: transparent transparent transparent rgb(138, 77, 200);
-      border-style: solid;
-      border-width: 0 0 300px 200px;
-    }
     > .inner {
       @include outer-container;
       padding: 3vh 0;
@@ -200,6 +192,17 @@ body.index {
         }
 
         &:first-child { position: relative; }
+      }
+    }
+
+    @include media($medium-screen) {
+      .section2-triangle {
+        position: absolute;
+        width: 60vw;
+        height: 0;
+        border-color: transparent transparent transparent rgb(138, 77, 200);
+        border-style: solid;
+        border-width: 0 0 300px 200px;
       }
     }
   }
