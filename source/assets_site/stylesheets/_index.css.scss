@@ -493,6 +493,53 @@ body.index {
     }
   }
 
+  .section8 {
+    $container_width: 90%;
+    background: #f5f5f5;
+
+    > .inner {
+      @include outer-container($container_width);
+      padding: 0 5vh;
+    }
+
+    .header {
+      font-weight: bold;
+      padding: 12vh 0 4vh 0;
+
+    }
+
+    .webinar {
+      padding-bottom: 60px;
+
+      .row {
+        @include fill-parent();
+        @include row(table);
+        padding: 0.5em 0;
+
+        .date {
+          padding-left: 1em;
+          @include span-columns(2 of 12);
+        }
+
+        .webinar-name {
+          @include span-columns(1 of 2);
+        }
+
+        &:last-child {
+          border-bottom: transparent;
+          @include reset-display;
+        }
+
+        &:nth-child(odd) {
+          background-color: #f1f1f1;
+        }
+        &:nth-child(even) {
+          background-color: white;
+        }
+      }
+    }
+  }
+
   .fixedNav {
     display: none;
     position: fixed;
