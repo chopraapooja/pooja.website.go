@@ -1,36 +1,23 @@
 body.help {
   @include sub-page-title;
 
-  .trapezium-left {
-    border-width: 0 10vw 30vh 0;
-  }
+  .section2 {
+    @include media($medium-screen) {
+      @include trapezium-rows;
+    }
 
-  .trapezium-right {
-    border-width: 0 0 30vh  10vw;
-  }
+    .column {
+      &:nth-child(odd) {
+        background: #f8f8f8;
+      }
 
-  .trapezium {
-    width: 55vw;
-    height: 0;
-    border-color: transparent transparent white transparent;
-    border-style: solid;
-  }
+      .title {
+        padding: 5vh 5vw;
+      }
 
-  #row1 {
-    justify-content: flex-start;
-  }
-
-  #row2 {
-    justify-content: flex-end;
-  }
-
-  #row3 {
-    justify-content: flex-start;
-  }
-
-  .row {
-    display: flex;
-    flex-direction: row;
-    background: #f8f8f8;
+      .summary {
+        padding: 0 5vw 5vh 5vw;
+      }
+    }
   }
 }

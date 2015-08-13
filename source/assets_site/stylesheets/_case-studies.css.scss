@@ -1,3 +1,7 @@
 body.case-studies {
   @include sub-page-title;
+
+  .section2 {
+    @include trapezium-rows;
+  }
 }

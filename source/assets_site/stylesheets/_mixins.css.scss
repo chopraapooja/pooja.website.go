@@ -24,3 +24,31 @@
     }
   }
 }
+
+@mixin trapezium-rows {
+  .column {
+    width: 50%;
+    float: left;
+    height: 30vh;
+    z-index: 1;
+    position: relative;
+
+    &:nth-child(2n + 1):before {
+      content: "";
+      background: no-repeat 50% 50%/cover;
+      height: 100%;
+      width: 100vw;
+      position: absolute;
+      z-index: -1;
+      left: 0;
+    }
+
+    &:nth-child(4n + 1):before {
+      background-image: image-url("common/trapezium-row-1.svg");
+    }
+
+    &:nth-child(4n + 3):before {
+      background-image: image-url("common/trapezium-row-2.svg");
+    }
+  }
+}
