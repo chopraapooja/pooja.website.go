@@ -8,7 +8,7 @@ body.help {
 
     .column {
       &:nth-child(odd) {
-        background: #f8f8f8;
+        background: $background_gray;
       }
 
       .title {

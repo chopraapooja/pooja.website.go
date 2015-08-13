@@ -5,7 +5,7 @@ body.index {
 
   .section1 {
     position: relative;
-    color: #F8F8F8;
+    color: $background_gray;
     font-weight: 300;
     background-color: $blue-gray;
 
@@ -350,7 +350,7 @@ body.index {
       @include shift(1);
 
       .contact-medium {
-        color: rgb(244, 118, 202);
+        color: $standout_text_color;
         font-weight: bold
       }
 
@@ -362,7 +362,7 @@ body.index {
     }
 
     @include media($large-screen) {
-      background-color: #f8f8f8;
+      background-color: $background_gray;
 
       .background {
         position: absolute;
@@ -377,7 +377,7 @@ body.index {
   }
 
   .section6 {
-    background-color: #f8f8f8;
+    background-color: $background_gray;
     min-height: auto;
     padding-top: 2px;
     position: relative;
