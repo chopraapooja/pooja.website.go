@@ -23,19 +23,56 @@ body.index {
       @include span-columns(10);
       @include shift(1);
 
-      @include media($medium-screen) {
-        @include span-columns(8 of 10);
-        @include shift(1);
-      }
-
       & h1 {
-        font-size: 450%;
+        font-size: 2.5em;
         font-weight: 300;
         margin-bottom: 0em;
+        font-weight: 300;
+        text-shadow: 1.5px 1.5px 5px rgba(0, 0, 0, 0.5);
+
+        @include media($medium-screen) {
+          font-size: 450%;
+        }
       }
 
       & .hero-text {
         margin-bottom: 2em;
+      }
+
+      @include media($medium-screen) {
+        @include span-columns(8 of 10);
+        @include shift(1);
+      }
+    }
+
+    @include media($medium-screen) {
+      .hero-tri-text {
+        width: 100px;
+        background-color: transparent;
+        height: 100px;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+        stroke: transparent;
+        stroke-width: 10px;
+        align-content: center;
+      }
+
+      .hero-triangle-text {
+        color: #009926;
+      }
+
+      .hero-triangle {
+        width: 0px;
+        height: 0px;
+        border-style: solid;
+        border-width: 0 0 300px 200px;
+        z-index: 1;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        border-color: transparent transparent black transparent;
       }
     }
 
@@ -48,46 +85,8 @@ body.index {
       z-index: 1;
 
       background: image-url("index/section1/go-hero-team.jpg");
+      background-position-x: 60%;
       background-size: cover;
-    }
-
-    .hero-tri-text {
-      width: 100px;
-      background-color: transparent;
-      height: 100px;
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      z-index: 1;
-      stroke: transparent;
-      stroke-width: 10px;
-      align-content: center;
-    }
-
-    .hero-triangle-text {
-      color: #009926;
-    }
-
-    .hero-triangle {
-      width: 0px;
-      height: 0px;
-      border-style: solid;
-      border-width: 0 0 300px 200px;
-      z-index: 1;
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      border-color: transparent transparent black transparent;
-    }
-
-    h1 {
-      font-weight: 300;
-      text-shadow: 1.5px 1.5px 5px rgba(0, 0, 0, 0.5);
-    }
-
-    h2 {
-      font-weight: 400;
-      text-shadow: 1.5px 1.5px 5px rgba(0, 0, 0, 0.5);
     }
 
     .view-details {
@@ -107,14 +106,6 @@ body.index {
   }
 
   .section2 {
-    .section2-triangle {
-      position: absolute;
-      width: 60vw;
-      height: 0;
-      border-color: transparent transparent transparent rgb(138, 77, 200);
-      border-style: solid;
-      border-width: 0 0 300px 200px;
-    }
     > .inner {
       @include outer-container;
       padding: 3vh 0;
@@ -203,6 +194,17 @@ body.index {
         &:first-child { position: relative; }
       }
     }
+
+    @include media($medium-screen) {
+      .section2-triangle {
+        position: absolute;
+        width: 60vw;
+        height: 0;
+        border-color: transparent transparent transparent rgb(138, 77, 200);
+        border-style: solid;
+        border-width: 0 0 300px 200px;
+      }
+    }
   }
 
   .section3 {
@@ -254,10 +256,11 @@ body.index {
   }
 
   .section4 {
-    padding: 0 0;
+    $container_width: 90%;
+    position: relative;
 
     > .inner {
-      @include outer-container;
+      @include outer-container($container_width);
       padding: 0 5vh;
     }
 
@@ -266,18 +269,9 @@ body.index {
       padding: 3vh 0;
     }
 
-    .triangle-on-triangle {
-      float: right;
-      .equalateral-triangle {
-        width: 0;
-        height: 0;
-        border-color: transparent transparent rgb(243, 71, 151) transparent;
-        border-style: solid;
-        border-width: 0 30px 30px 30px;
-      }
-    }
-
     .pricing {
+      padding-bottom: 60px;
+
       .row {
         @include fill-parent();
         @include row(table);
@@ -306,27 +300,28 @@ body.index {
         }
       }
     }
+
+    @include media($medium-screen) {
+      .triangle-on-triangle {
+        position: absolute;
+        bottom: 0;
+        right: 100 - $container_width;
+
+        .equalateral-triangle {
+          border-color: transparent transparent rgb(243, 71, 151) transparent;
+          border-style: solid;
+          border-width: 0 30px 30px 30px;
+        }
+      }
+    }
   }
 
   .section5 {
-    background-color: #f8f8f8;
     position: relative;
 
     > .inner {
-      @include outer-container;
+      @include outer-container(100%);
       padding: 5vh 0;
-    }
-
-    @include media($large-screen) {
-      .background {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        left: 0;
-        top: 0;
-        background: image-url("index/section5/background.svg");
-        background-size: cover;
-      }
     }
 
     .header {
@@ -337,15 +332,9 @@ body.index {
     }
 
     .marketo-form {
-      @include span-columns(10);
-      @include shift(1);
-
-      @include media($medium-screen) {
-        @include span-columns(4);
-        @include shift(1);
-      }
-
-      padding: 0;
+      @include span-columns(12);
+      padding: 0 5vh;
+      background-color: #f476ca;
       border: 0;
       font: inherit;
       font-size: 100%;
@@ -358,21 +347,45 @@ body.index {
       .mktoLabel {
         margin-bottom: 10px;
       }
+
+      button.mktoButton {
+        margin-top: 10px;
+      }
+
+      @include media($medium-screen) {
+        @include span-columns(4);
+        @include shift(1);
+        background-color: transparent;
+      }
     }
 
     .contact-us {
       @include span-columns(10);
       @include shift(1);
 
+      .contact-medium {
+        color: rgb(244, 118, 202);
+        font-weight: bold
+      }
+
       @include media($medium-screen) {
         @include span-columns(4);
         @include shift(3);
         margin-top: 10%;
       }
+    }
 
-      .contact-medium {
-        color: rgb(244, 118, 202);
-        font-weight: bold
+    @include media($large-screen) {
+      background-color: #f8f8f8;
+
+      .background {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background: image-url("index/section5/background.svg");
+        background-size: cover;
       }
     }
   }
@@ -474,36 +487,31 @@ body.index {
   }
 
   .section7 {
-    .parallogram-sequence {
-      display: inline-flex;
+    > .inner {
+      @include outer-container(100%);
     }
 
-    .parallogram {
-      width: 33vw;
-      height: 22vh;
-      background: #f8f8f8;
-    }
+    .customer {
+      padding: 5vh;
 
-    .forward-parallogram {
-      -webkit-transform: skew(30deg);
-      -moz-transform: skew(30deg);
-      -o-transform: skew(30deg);
-      transform: skew(30deg);
-    }
+      @include media($medium-screen) {
+        float: left;
+        height: 200px;
+        margin-right: 0;
+        width: 33.3%;
 
-    .parallogram-content {
-      position: absolute;
-      z-index: 1;
-      margin: 3%;
-      max-width: 33vw;
-      max-height: 10vh;
-    }
+        &:nth-child(even) {
+          background-color: white;
+        }
 
-    .backward-parallogram {
-      -webkit-transform: skew(30deg);
-      -moz-transform: skew(30deg);
-      -o-transform: skew(30deg);
-      transform: skew(-30deg);
+        &:nth-child(odd) {
+          background-color: #f8f8f8;
+        }
+
+        &.title {
+          background-color: #f36fca;
+        }
+      }
     }
   }
 
