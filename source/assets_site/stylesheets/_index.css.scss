@@ -477,48 +477,19 @@ body.index {
       @include outer-container(100%);
     }
 
-    .f {
-      &:nth-child(odd) {
-        background: image_url("index/section7/parallelogram_grey_right.svg");
-      }
-      &:nth-child(even) {
-        background: image_url("index/section7/parallelogram_white_right.svg");
-      }
+    .header {
+      font-weight: bold;
+      font-size: 150%;
+      padding: 12vh 0 4vh 0;
+      margin-top: 0;
     }
 
-    .b {
-      &:nth-child(odd) {
-        background: image_url("index/section7/parallelogram_grey_left.svg");
-        background-size: cover;
-      }
-      &:nth-child(even) {
-        background: image_url("index/section7/parallelogram_white_left.svg");
-      }
+    .logo-wrap {
+      text-align: center;
     }
 
-    .customer {
-      padding: 5vh;
-
-      @include media($medium-screen) {
-        float: left;
-        height: 200px;
-        margin-right: 0;
-        width: 33.3%;
-        background-size: cover;
-
-        &:nth-child(even) {
-          background-color: #f0f0f0;
-        }
-
-        &:nth-child(odd) {
-          background-color: white;
-        }
-
-        &.title {
-          color: white;
-          background-color: #d96ff3;
-        }
-      }
+    .customer-logo {
+      margin: 0 3vw;
     }
   }
 
