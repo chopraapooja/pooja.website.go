@@ -477,6 +477,25 @@ body.index {
       @include outer-container(100%);
     }
 
+    .f {
+      &:nth-child(odd) {
+        background: image_url("index/section7/parallelogram_grey_right.svg");
+      }
+      &:nth-child(even) {
+        background: image_url("index/section7/parallelogram_white_right.svg");
+      }
+    }
+
+    .b {
+      &:nth-child(odd) {
+        background: image_url("index/section7/parallelogram_grey_left.svg");
+        background-size: cover;
+      }
+      &:nth-child(even) {
+        background: image_url("index/section7/parallelogram_white_left.svg");
+      }
+    }
+
     .customer {
       padding: 5vh;
 
@@ -485,13 +504,14 @@ body.index {
         height: 200px;
         margin-right: 0;
         width: 33.3%;
+        background-size: cover;
 
         &:nth-child(even) {
-          background-color: white;
+          background-color: #f0f0f0;
         }
 
         &:nth-child(odd) {
-          background-color: #f8f8f8;
+          background-color: white;
         }
 
         &.title {
