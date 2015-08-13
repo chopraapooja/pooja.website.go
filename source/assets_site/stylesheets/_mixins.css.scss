@@ -19,6 +19,11 @@
           position: absolute;
           left: 1em;
           top: 15vh;
+          text-transform: uppercase;
+
+          h2 {
+            font-weight: bold;
+          }
         }
       }
     }
