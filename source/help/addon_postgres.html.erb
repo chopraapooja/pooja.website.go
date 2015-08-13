@@ -13,5 +13,79 @@ keywords: continuous integration, continuous delivery, pipelines
       </div>
     </div>
   </div>
+</section>
 
+<section class="section2">
+  <div class="inner">
+    <h2>Enabling Go to use Postgres</h2>
+
+    This section describes how to bring up a Go Server instance, using Postgres as the data store with no existing data. In case you're
+    looking to migrate the data from an existing Go Server instance, take a look <a href="">at this</a>. Once the data is migrated, you
+    can start configuring the Go Server to use the database, by starting from Step 2 below.
+
+    <div class="warning">In case of Linux, all operations given below should be performed as go user, unless stated otherwise.</div>
+
+    <h3>Step 1: Initialize Postgres with an empty database</h3>
+
+    <p>
+      In order to use this add-on, a Postgres server is needed, to host the Go Server's database. Currently, Postgres
+      versions 9.2 and 9.3 are supported by Go, older verions are not supported. If the Postgres server is not yet
+      <a href="http://www.postgresql.org/docs/current/static/app-initdb.html">initialized</a>, it needs to be, before Go is able to use it.
+    </p>
+
+    <p>
+      Once initialized and the Postgres service is started, the empty database can be created from the command-line using the psql utility,
+      which Postgres ships with:
+    </p>
+
+    <pre><code>$ psql -U postgres -h localhost
+      psql=# CREATE DATABASE cruise-or-desired-database-name;
+      psql=# \q</code></pre>
+
+    <p>
+      The Go Server uses <em>cruise</em> as the default database name. The database name chosen can be that, or any other valid Postgres database
+      name. While configuring the Go Server in a later step, the chosen name can be configured. There is no need to create any schema in that
+      database, since the Go Server does it automatically.
+    </p>
+
+    <h3>Step 2: Install add-on into addons directory</h3>
+
+    <p>
+      A directory called "addons" needs to be created (if not already present) in the Go Server installation directory. The add-on JAR needs to be
+      placed in that directory. In the examples below, the default location of that directory is used, with the add-on JAR name considered to be
+      "go-postgresql-1.2.3.jar". The name of the real add-on JAR will be different. The commands are:
+    </p>
+
+    <p>On Linux (remember the warning earlier about running all commands as go user):</p>
+
+    <pre><code>mkdir -p /var/lib/go-server/addons
+      cp go-postgresql-1.2.3.jar /var/lib/go-server/addons</code></pre>
+
+    <p>On Windows:</p>
+
+    <pre><code>md "C:\Program Files (x86)\Go Server\addons"
+      copy go-postgresql-1.2.3.jar "C:\Program Files (x86)\Go Server\addons"</code></pre>
+
+    <h3>Step 3: Configure Go with Postgres connection details</h3>
+
+    <p>
+      A Java properties file with the name 'postgresqldb.properties' needs to be created in Go's configuration directory. This file should contain
+      information about the Postgres server, so that the Go Server can connect to it. Information about the format of this file and valid keys in it
+      can be found in the section <a href="">"Database configuration reference"</a> below.
+    </p>
+
+    <p>
+      The location of Go's configuration directory varies per operating system. The
+      <a href="http://www.go.cd/documentation/user/current/installation/installing_go_server.html#location-of-files-after-installation-of-go-server">
+        documentation
+      </a> provides information about the locations.
+    </p>
+
+    <h3>Step 4: Configure the database provider for Go</h3>
+
+    <p>
+      At this point, Go needs to be configured to use Postgres as its data store rather than the default. This is done by providing
+    </p>
+
+  </div>
 </section>
