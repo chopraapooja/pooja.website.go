@@ -1,3 +1,97 @@
 body.support-terms {
   @include sub-page-title;
+
+  .section2 {
+    @include outer-container;
+
+    .inner {
+      @include span-columns(10);
+      @include shift(1);
+      padding: 3vh 0;
+
+      $title_size: 32px;
+
+      ol {
+        counter-reset: section;
+        list-style-type: none;
+
+        li {
+          position: relative;
+        }
+
+        li::before {
+          counter-increment: section;
+          content: counters(section,".") " ";
+          position: absolute;
+          right: 100%;
+        }
+
+        &.level1 > li {
+          margin-top: 2em;
+        }
+
+        &.level1 > li::before {
+          font-size: $title_size;
+          margin-right: 10px;
+        }
+
+        &.level2 {
+          margin-left: 2em;
+          margin-top: 1em;
+
+          li {
+            padding-left: 8px;
+            padding-bottom: 5px;
+          }
+
+          .level3 {
+            margin-left: 2em;
+            margin-top: 1em;
+          }
+        }
+
+        .title {
+          width: 100%;
+          font-size: $title_size;
+        }
+
+        strong {
+          font-weight: bold;
+        }
+      }
+
+      .services {
+        @include outer-container;
+        padding-bottom: 2em;
+
+        .header {
+          font-weight: bold;
+          margin-top: 1em;
+
+          &.row {
+            border-bottom: 2px solid black;
+          }
+        }
+
+        .row {
+          @include span-columns(10);
+          @include shift(1);
+          border-bottom: 1px solid #CCC;
+
+          text-align: left;
+          padding: 12px 0;
+        }
+
+        .level {
+          @include span-columns(5 of 10);
+          font-weight: bold;
+        }
+
+        .premium {
+          @include span-columns(5 of 10);
+          @include reset-display;
+        }
+      }
+    }
+  }
 }
