@@ -118,18 +118,13 @@ body.index {
   }
 
   .section2 {
+    @include title-styles;
     > .inner {
       @include outer-container;
       padding: 3vh 0;
       @include media($medium-screen) {
         padding: 6vh 0;
       }
-    }
-
-    .title {
-      font-size: 200%;
-      position: relative;
-      float: none;
     }
 
     .cards {
@@ -148,32 +143,6 @@ body.index {
 
         padding: 0 0 5vh;
         position: relative;
-
-        .card_title, .card_text {
-          text-align: center;
-          color: $base-font-color;
-
-          @include media($medium-screen) {
-            text-align: left;
-          }
-        }
-
-        .card_title {
-          font-weight: 600;
-          text-transform: uppercase;
-        }
-
-        .card_text {
-          font-size: 0.9em;
-
-          @include media($medium-screen) {
-            font-size: 0.95em;
-          }
-
-          @include media($large-screen) {
-            font-size: 1em;
-          }
-        }
 
         &:last-child {
           padding-bottom: 0;
@@ -226,6 +195,7 @@ body.index {
   }
 
   .section3 {
+    @include title-styles;
     background-color: #f5f5f5;
     padding: 5vh 0;
 
@@ -242,12 +212,6 @@ body.index {
     > .inner {
       @include outer-container;
       padding: 0 5vh;
-    }
-
-    .title {
-      font-size: 250%;
-      padding: 12vh 0 4vh 0;
-      margin-top: 0;
     }
 
     .support-icon {
@@ -273,18 +237,13 @@ body.index {
   }
 
   .section4 {
+    @include title-styles;
     $container_width: 90%;
     position: relative;
 
     > .inner {
       @include outer-container($container_width);
       padding: 0 5vh;
-    }
-
-    .title {
-      font-size: 250%;
-      padding: 12vh 0 4vh 0;
-      margin-top: 0;
     }
 
     .pricing {
@@ -296,10 +255,9 @@ body.index {
         padding: 0.5em 0;
         text-align: center;
 
-        &.header {
-          font-weight: bold;
+        h2 {
+          text-align: center;
         }
-
         .number-of-pipelines {
           @include span-columns(4 of 12);
         }
@@ -325,18 +283,12 @@ body.index {
   }
 
   .section5 {
+    @include title-styles;
     position: relative;
 
     > .inner {
       @include outer-container(100%);
       padding: 5vh 0;
-    }
-
-    .header {
-      position: relative;
-      font-weight: bold;
-      padding: 3vh 0;
-      text-align: left;
     }
 
     .marketo-form {
@@ -371,9 +323,8 @@ body.index {
       @include span-columns(10);
       @include shift(1);
 
-      .contact-medium {
+      .contact-number {
         color: $standout_text_color;
-        font-weight: bold
       }
 
       @include media($medium-screen) {
@@ -403,6 +354,7 @@ body.index {
     min-height: auto;
     padding-top: 2px;
     position: relative;
+    @include title-styles;
     @include media($large-screen) {
       > .inner {
 
@@ -454,8 +406,6 @@ body.index {
         font-style: italic;
         margin-bottom: 1.5em;
       }
-      .about-TW-CD {
-      }
       .fowler-section {
         position: relative;
 
@@ -481,10 +431,15 @@ body.index {
           margin: 2%;
         }
         #jez-quote {
+          font-size: 0.9em;
           text-align: right;
           padding: 1em;
         }
+        .name {
+          font-style: italic;
+        }
       }
+
 
       .text-portion {
         text-align: center;
@@ -495,6 +450,7 @@ body.index {
   }
 
   .section7 {
+    @include title-styles;
     > .inner {
       @include outer-container(100%);
     }

@@ -30,6 +30,36 @@
   }
 }
 
+@mixin title-styles  {
+  h1 { //section heading
+    font-weight: 300;
+    font-size: 2em;
+    padding: 12vh 2vw 4vh 2vw;
+    text-align: center;
+  }
+  h2 { //section sub-heading
+    position: relative;
+    display: inline;
+    font-weight: 600;
+    font-size: 1.1em;
+    text-transform: uppercase;
+    text-align: center;
+    @include media($medium-screen) {
+      text-align: left;
+    }
+  }
+  p {
+      margin: 0;
+      font-size: 0.9em;
+      @include media($medium-screen) {
+        font-size: 0.95em;
+      }
+      @include media($large-screen) {
+        font-size: 1em;
+      }
+  }
+}
+
 @mixin trapezium-rows {
   .column {
     width: 50%;
