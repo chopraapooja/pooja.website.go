@@ -50,6 +50,7 @@
 
 
   $('[data-component=jumpScoll]').on('click', function() {
+    event.preventDefault();
     var $this = $(this),
       target = $this.data('target');
     if (!target) return;
