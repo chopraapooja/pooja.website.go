@@ -1,31 +1,107 @@
 body.help_addon_postgres {
-  .section2 {
-    .inner {
-      @include outer-container;
-      padding: 3vh 3vw;
-    }
+  .inner {
+    @include outer-container;
+    padding: 3vh 3vw;
+  }
 
-    pre {
-      padding-bottom: 1em;
+  code {
+    font-family: monospace;
+    word-wrap: break-word;
+  }
 
-      code {
-        display: block;
-        white-space: pre-line;
-        font-family: monospace;
-        border: 1px solid;
-        padding: 10px;
+  pre {
+    padding-bottom: 1em;
+
+    code {
+      display: block;
+      white-space: pre-line;
+      border: 1px solid;
+      padding: 10px;
+
+      &.dont-lose-wrap {
+        white-space: pre;
       }
     }
+  }
 
-    h2, h3 {
-      text-align: left;
+  h2, h3 {
+    text-align: left;
+  }
+
+  .warning {
+    background-color: rgba(255, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 4px 1em;
+    margin-top: 1em;
+
+    &:before {
+      content: "Warning: ";
     }
+  }
 
-    .warning {
-      background-color: rgba(255, 0, 0, 0.2);
-      border-radius: 12px;
-      padding: 4px 1em;
-      margin-top: 1em;
+  .note {
+    background-color: rgba(0, 0, 255, 0.2);
+    border-radius: 12px;
+    padding: 4px 1em;
+    margin-top: 1em;
+
+    &:before {
+      content: "Note: ";
+    }
+  }
+
+  section.index {
+    .inner > ul {
+      > li {
+        padding-top: 1em;
+
+        > ul li {
+          padding-left: 2em;
+        }
+      }
+    }
+  }
+
+  .section5 {
+    .config_properties .property {
+      margin: 2em 0;
+      padding: 0.5em;
+
+      &:nth-child(odd) {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+
+      &:nth-child(even) {
+        background-color: rgba(0, 0, 0, 0.04);
+      }
+
+      .key {
+        font-weight: bold;
+
+        &:before {
+          content: "Key: ";
+        }
+      }
+
+      .mandatory {
+        font-size: smaller;
+
+        &:before {
+          content: "Mandatory: ";
+        }
+      }
+
+      .default {
+        font-size: smaller;
+
+        &:before {
+          content: "Default: ";
+        }
+      }
+
+      .description {
+        margin: 1em 0 2em 0;
+      }
     }
   }
 }

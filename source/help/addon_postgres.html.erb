@@ -15,16 +15,70 @@ keywords: continuous integration, continuous delivery, pipelines
   </div>
 </section>
 
-<section class="section2">
+<section class="index">
+  <div class="inner">
+    <p>
+      This document describes the different aspects of setting up Go to use Postgres as its data store, including migration of data
+      from H2 and setting up a secure connection between the Go Server and Postgres.
+    </p>
+
+    The index to this document is as follows:
+
+    <ul>
+      <li>
+        <a href="#enable_postgres">Enabling Go to use Postgres</a>
+        <ul>
+          <li><a href="#enable_postgres_initialize">Step 1: Initialize Postgres with an empty database</a></li>
+          <li><a href="#enable_postgres_install_addon">Step 2: Install add-on into addons directory</a></li>
+          <li><a href="#enable_postgres_configure">Step 3: Configure Go with Postgres connection details</a></li>
+          <li><a href="#enable_postgres_setup_provider">Step 4: Configure the database provider for Go</a></li>
+          <li><a href="#enable_postgres_verify">Step 5: Start the Go Server and verify that Postgres is being used</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="#migrating_from_h2_to_postgres">Migrating an existing Go Server installation to Postgres</a>
+        <ul>
+          <li><a href="#migration_backup">Step 1: Upgrade, backup and stop the Go Server</a></li>
+          <li><a href="#migration_setup">Step 2: Get everything ready for migration</a></li>
+          <li><a href="#migration_run">Step 3: Run the migration!</a></li>
+          <li><a href="#migration_use_new_db">Step 4: Use Go with the newly migrated database</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="#upgrade_installation">Upgrading an existing installation which uses Postgres</a>
+        <ul>
+          <li><a href="#upgrade_shutdown">Step 1: Shut down the Go Server</a></li>
+          <li><a href="#upgrade_replace_addon">Step 2: Replace the old add-on with the new</a></li>
+          <li><a href="#upgrade_run">Step 3: Upgrade the Go Server</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="#addon_configuration">Add-on configuration reference</a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="section2" id="enable_postgres">
   <div class="inner">
     <h2>Enabling Go to use Postgres</h2>
 
     This section describes how to bring up a Go Server instance, using Postgres as the data store with no existing data. In case you're
-    looking to migrate the data from an existing Go Server instance, take a look <a href="">at this</a>. Once the data is migrated, you
-    can start configuring the Go Server to use the database, by starting from Step 2 below.
+    looking to migrate the data from an existing Go Server instance, take a look <a href="#migrating_from_h2_to_postgres">at this</a>.
+    Once the data is migrated, you can start configuring the Go Server to use the database, by starting from Step 2 below.
 
-    <div class="warning">In case of Linux, all operations given below should be performed as go user, unless stated otherwise.</div>
+    <div class="note">You can get the PostgreSQL add-on for Go by contacting
+      <%= link_to 'ThoughtWorks Sales and Support', '/index.html#get-started' %>.</div>
 
+    <div class="warning">
+      In case of Linux, all operations given below should be performed as go user, unless stated otherwise. Please make sure your Go
+      Server is stopped before configuring this.
+    </div>
+
+    <a name="enable_postgres_initialize"></a>
     <h3>Step 1: Initialize Postgres with an empty database</h3>
 
     <p>
@@ -48,12 +102,13 @@ keywords: continuous integration, continuous delivery, pipelines
       database, since the Go Server does it automatically.
     </p>
 
+    <a name="enable_postgres_install_addon"></a>
     <h3>Step 2: Install add-on into addons directory</h3>
 
     <p>
       A directory called "addons" needs to be created (if not already present) in the Go Server installation directory. The add-on JAR needs to be
-      placed in that directory. In the examples below, the default location of that directory is used, with the add-on JAR name considered to be
-      "go-postgresql-1.2.3.jar". The name of the real add-on JAR will be different. The commands are:
+      placed in that directory. In the examples below, the add-on JAR name is considered to be "go-postgresql-1.2.3.jar". The name of the real add-on
+      JAR will be different. The commands are:
     </p>
 
     <p>On Linux (remember the warning earlier about running all commands as go user):</p>
@@ -66,12 +121,24 @@ keywords: continuous integration, continuous delivery, pipelines
     <pre><code>md "C:\Program Files (x86)\Go Server\addons"
       copy go-postgresql-1.2.3.jar "C:\Program Files (x86)\Go Server\addons"</code></pre>
 
+    <p>
+      <div class="warning">Ensure that there are no other Postgres add-on JAR files in the addons directory.</div>
+    </p>
+
+    <p>
+      The location of Go's installation directory varies per operating system. The
+      <a href="http://www.go.cd/documentation/user/current/installation/installing_go_server.html#location-of-files-after-installation-of-go-server">
+        documentation
+      </a> provides information about the locations.
+    </p>
+
+    <a name="enable_postgres_configure"></a>
     <h3>Step 3: Configure Go with Postgres connection details</h3>
 
     <p>
       A Java properties file with the name 'postgresqldb.properties' needs to be created in Go's configuration directory. This file should contain
       information about the Postgres server, so that the Go Server can connect to it. Information about the format of this file and valid keys in it
-      can be found in the section <a href="">"Database configuration reference"</a> below.
+      can be found in the section <a href="#addon_configuration">"Add-on configuration reference"</a> below.
     </p>
 
     <p>
@@ -81,11 +148,344 @@ keywords: continuous integration, continuous delivery, pipelines
       </a> provides information about the locations.
     </p>
 
+    <a name="enable_postgres_setup_provider"></a>
     <h3>Step 4: Configure the database provider for Go</h3>
 
     <p>
-      At this point, Go needs to be configured to use Postgres as its data store rather than the default. This is done by providing
+      At this point, Go needs to be configured to use Postgres as its data store rather than the default. This is done by setting the Java system property
+      <code>go.database.provider</code> to <code>com.thoughtworks.go.postgresql.PostgresqlDatabase</code>.
     </p>
 
+    <p>On Linux, this can usually be done by (on a single line):</p>
+
+    <pre><code>echo "GO_SERVER_SYSTEM_PROPERTIES=$GO_SERVER_SYSTEM_PROPERTIES -Dgo.database.provider=com.thoughtworks.go.postgresql.PostgresqlDatabase" >> /etc/default/go-server</code></pre>
+
+    <p>On Windows, this can usually be done by adding a line in the appropriate properties file:</p>
+
+    <pre><code>wrapper.java.additional.16="-Dgo.database.provider=com.thoughtworks.go.postgresql.PostgresqlDatabase"</code></pre>
+
+    <p>
+      The process of setting a system property is detailed
+      <a href="http://www.go.cd/documentation/user/current/advanced_usage/other_config_options.html#system-properties">here</a>
+      in the documentation.
+    </p>
+
+    <a name="enable_postgres_verify"></a>
+    <h3>Step 5: Start the Go Server and verify that Postgres is being used</h3>
+
+    <p>
+      The Go Server can now be started. On Linux:
+    </p>
+
+    <pre><code>sudo /etc/init.d/go-server start</code></pre>
+
+    <p>On Windows:</p>
+
+    <pre><code>net start "Go Server"</code></pre>
+
+    <p>
+    You can verify that Go is running with Postgres by verifying the below line in the go-server.log, upon starting the service.
+    </p>
+
+    <pre><code>[DB] Using connection configuration jdbc:postgresql://[host]:[port]/[database-name] [User: postgres] [Password Encrypted: false]</code></pre>
+  </div>
+</section>
+
+<section class="section3" id="migrating_from_h2_to_postgres">
+  <div class="inner">
+    <h2>Migrating an existing Go Server installation to Postgres</h2>
+
+    <a name="migration_backup"></a>
+    <h3>Step 1: Upgrade, backup and stop the Go Server</h3>
+
+    <p>Step 1.1: Upgrade the Go Server to the latest version.</p>
+
+    <p>Step 1.2: Then, backup the H2 database and configuration using the
+      <%= link_to 'One Click Backup', 'http://www.go.cd/documentation/user/current/advanced_usage/one_click_backup.html' %> feature of Go. During
+      the migration process from H2 to Postgres, data from the backed-up H2 database will be exported into CSV files and no modifications will be done on the
+      H2 database.
+    </p>
+
+    <p>Step 1.3: Stop the Go Server and ensure that the cruise.lock.db file does not exist under the db/h2db directory, indicating a clean shutdown has finished.</p>
+
+    <a name="migration_setup"></a>
+    <h3>Step 2: Get everything ready for migration</h3>
+
+    <p>Step 2.1: Create a new directory for migration. In this document, the chosen directory will be <code>/tmp/migration</code> and it will be referred to as the
+      "migration location" for the rest of this document.</p>
+
+    <p>Step 2.2: Place the PostgreSQL add-on for Go into the migration location. Copy cruise.h2.db (from the backup or from <code>/var/lib/go-server/db/h2db</code>) to the
+      migration location.</p>
+
+    <p>
+      <div class="note">You can get the PostgreSQL add-on for Go by contacting
+        <%= link_to 'ThoughtWorks Sales and Support', '/index.html#get-started' %>.</div>
+    </p>
+
+    <p>Step 2.3: Create a directory called "config" in the migration location (if the migration location is <ocde>/tmp/migration</code>, the config directory should be
+      <code>/tmp/migration/config</code>). In that directory, place all the configuration files needed to tell Go about the Postgres instance it needs to use. At a
+      minimum, this needs to contain a file called "postgresqldb.properties". More information about the format of these files and valid keys in them can be found
+      in the section <a href="#addon_configuration">"Add-on configuration reference"</a> below.
+    </p>
+
+    <a name="migration_run"></a>
+    <h3>Step 3: Run the migration!</h3>
+
+    <p>
+      At this point, the migration directory should look like the one below:
+
+      <pre>
+        <code class="dont-lose-wrap">/
+|-- tmp/
+   |-- migration/
+      |-- config/
+         |-- postgresqldb.properties
+         |-- cipher [optional: depends on whether db.passwordEncrypted is set to true]
+         |-- client.crt ... [optional: depends on Postgres SSL setup]
+      |-- cruise.h2.db
+      |-- go-postgresql-1.2.3.jar</code></pre>
+    </p>
+
+    <p>The migration can now be run from the command-line, in the migration directory:</p>
+
+    <pre><code>cd /tmp/migration
+      java -Dcruise.config.dir=/tmp/migration/config -Dgo.h2.db.location=/tmp/migration -jar go-postgresql-1.2.3.jar
+    </code></pre>
+
+    <p>On Windows, the arguments to the command will be the same. The locations will need to be Windows-specific (like C:\tmp\migration).</p>
+
+    <a name="migration_use_new_db"></a>
+    <h3>Step 4: Use Go with the newly migrated database</h3>
+
+    <p>
+      After a successful migration, the steps mentioned in <a href="#enable-pg">"Enabling Go to use Postgres"</a> section can now be followed to
+      setup Go to use Postgres. "Step 1: Initialize Postgres with an empty database" can be ignored, since Postgres is already initialized with
+      the migrated data.
+    </p>
+
+    <p>Please contact support for any queries or issues.</p>
+  </div>
+</section>
+
+<section class="section4" id="upgrade_installation">
+  <div class="inner">
+    <h2>Upgrading an existing installation which uses Postgres</h2>
+
+    <p>
+      This section will help you upgrade your Go Server installation which uses Postgres as its data store.
+    </p>
+
+    <p>
+      <div class="note">Always ensure that you have compatible versions of the Postgres add-on and Go Server before you start. You can get the
+        PostgreSQL add-on for Go by contacting <%= link_to 'ThoughtWorks Sales and Support', '/index.html#get-started' %>.</div>
+    </p>
+
+    <p>
+      Suppose you are uprgrading from Go Server 15.1.0, which uses go-postgresql-15.1.0-123.jar to Go Server 15.2.0, which uses
+      go-postgresql-15.2.0-456.jar (as an example), the steps for an upgrade are as follows:
+    </p>
+
+    <a name="upgrade_shutdown"></a>
+    <h3>Step 1: Shut down the Go Server</h3>
+
+    <p>
+      Before upgrading, it is recommended to shut down the Go Server and take a backup of the data. The
+      <%= link_to 'One Click Backup', 'http://www.go.cd/documentation/user/current/advanced_usage/one_click_backup.html' %> feature of Go can
+      be used to take a backup. On Linux, the Go Server can be shutdown using:
+    </p>
+
+    <pre><code>sudo /etc/init.d/go-server stop</code></pre>
+
+    <a name="upgrade_replace_addon"></a>
+    <h3>Step 2: Replace the old add-on with the new</h3>
+
+    <p>
+      Remove the old add-on from the Go Server's "addons" directory, and replace it with the new one.
+    </p>
+
+    <pre><code>sudo su - go
+    rm /var/lib/go-server/addons/go-postgresql-15.1.0-123.jar
+    cp /tmp/go-postgresql-15.2.0-456.jar /var/lib/go-server/addons
+    </code></pre>
+
+    <div class="warning">
+      Ensure that the add-on is owned and readable by the "go" user. Also, ensure that there is only one add-on of the same type in the
+      "addons" directory. Having more than one of the same type (go-postgresql-15.1.0-123.jar and go-postgresql-15.2.0-456.jar) can lead
+      to unexpected behavior or failure to start up the Go Server.
+    </div>
+
+    <a name="upgrade_run"></a>
+    <h3>Step 3: Upgrade the Go Server</h3>
+
+    <p>
+      Upgrade the Go Server as you would, normally. In the case of an RPM based distribution, it is usually done like this:
+    </p>
+
+    <pre><code>sudo rpm -Uvh go-server-15.2.0-1234.jar</code></pre>
+  </div>
+</section>
+
+<section class="section5" id="addon_configuration">
+  <div class="inner">
+    <h2>Add-on configuration reference</h2>
+
+    <p>
+      This section will help you configure the add-on with details about the Postgres instance it needs to connect to and use. Optionally,
+      you can set it to use SSL for its communication with the Postgres server.
+    </p>
+
+    <p>The configuration file for the Go PostgreSQL add-on is called "postgresqldb.properties" and it should be created in Go's configuration directory.
+      A sample configuration file could look like this:
+
+      <pre><code>db.host=localhost
+                 db.port=5432
+                 db.name=cruise
+                 db.user=postgres
+                 db.password=postgres</code></pre>
+
+      The valid keys in the configuration file are mentioned below:
+    </p>
+
+    <div class="config_properties">
+      <div class="property">
+        <div class="key">db.host</div>
+        <div class="mandatory">Yes</div>
+        <div class="description">The value should be the IP address or the hostname of the Postgres server that is to be used.</div>
+      </div>
+
+      <div class="property">
+        <div class="key">db.port</div>
+        <div class="mandatory">No</div>
+        <div class="default">5432</div>
+        <div class="description">The value should be the port that the Postgres server is using and listening on.</div>
+      </div>
+
+      <div class="property">
+        <div class="key">db.name</div>
+        <div class="mandatory">No</div>
+        <div class="default">cruise</div>
+        <div class="description">The database schema name that the Go Server should use.</div>
+      </div>
+
+      <div class="property">
+        <div class="key">db.user</div>
+        <div class="mandatory">Yes</div>
+        <div class="description">The database user which Go should use to connect to the schema.</div>
+      </div>
+
+      <div class="property">
+        <div class="key">db.password</div>
+        <div class="mandatory">No</div>
+        <div class="description">The password for the user specified by "db.user" property which Go should use to connect to the schema.</div>
+      </div>
+
+      <div class="property">
+        <div class="key">db.passwordEncrypted</div>
+        <div class="mandatory">No</div>
+        <div class="default">false</div>
+        <div class="description">
+          This property should be set to "true" if the "db.password" property contains an encrypted value that the add-on should decrypt using
+          the Go cipher file, before using.
+        </div>
+      </div>
+
+      <div class="property">
+        <div class="key">db.maxActive</div>
+        <div class="mandatory">No</div>
+        <div class="default">32</div>
+        <div class="description">Maximum number of active connections that should be established with the Postgres server.</div>
+      </div>
+
+      <div class="property">
+        <div class="key">db.maxIdle</div>
+        <div class="mandatory">No</div>
+        <div class="default">32</div>
+        <div class="description">Maximum number of idle connections that should be maintained with the Postgres server.</div>
+      </div>
+
+      <div class="property">
+        <div class="key">db.ssl</div>
+        <div class="mandatory">No</div>
+        <div class="default">false</div>
+        <div class="description">
+          This property should be set to "true" to enable SSL connections to the Postgres server. If this is set to "true", then the other
+          SSL and certificate related properties (below) should also be set.
+        </div>
+      </div>
+
+      <div class="property">
+        <div class="key">db.ssl.mode</div>
+        <div class="mandatory">No</div>
+        <div class="default">verify-full</div>
+        <div class="description">
+          Indicates the verification level of the server certificate when SSL is used. In order to prevent spoofing, SSL certificate verification
+          must be used. However, for evaluation or test environments, this can be set to lower security levels. This flag corresponds to "sslmode"
+          connection parameter which is passed on to "libpq" library used by Postgres. For more details, take a look at
+          <a href="http://www.postgresql.org/docs/current/static/libpq-ssl.html#LIBPQ-SSL-PROTECTION">libpq SSL support</a> documentation.
+        </div>
+      </div>
+
+      <div class="property">
+        <div class="key">db.root.cert</div>
+        <div class="mandatory">No</div>
+        <div class="default">root.pem</div>
+        <div class="description">
+          Filename of the root certificate file. This property needs to be configured if SSL connection is used. This file should be placed
+          in the Go Server's configuration directory. This property corresponds to "sslrootcert" connection parameter which is passed on to "libpq"
+          library used by Postgres. Go uses <a href="http://jdbc.postgresql.org/">Postgres' JDBC driver</a> to connect to the database, and
+          <a href="http://www.postgresql.org/docs/current/static/app-pgdump.html">pg_dump</a> to perform backups. The former requires
+          either PEM or DER encoded certificates, while the latter could work with either CRT file or PEM. Hence, only PEM encoded certificates
+          can be used with Go as of now.
+        </div>
+      </div>
+
+      <div class="property">
+        <div class="key">db.client.cert</div>
+        <div class="mandatory">No</div>
+        <div class="default">client.crt</div>
+        <div class="description">
+          Client certificate filename. The certificate in this file will be provided when Postgres server requests a trusted client certificate.
+          This file should be placed in the Go Server's configuration directory. This property corresponds to "sslcert" connection parameter
+          which is passed on to "libpq" library used by Postgres.
+        </div>
+      </div>
+
+      <div class="property">
+        <div class="key">db.client.key</div>
+        <div class="mandatory">No</div>
+        <div class="default">client.key</div>
+        <div class="description">
+          RSA private key file for the client certificate. The key file should be placed in the Go Server's configuration directory and must not
+          allow any access to world or group (can be done using: <code>chmod 600 client.key</code>). This property corresponds to "sslkey" connection
+          parameters which is passed on to "libpq" library used by Postgres. If this file is not provided, "One Click Backup" from Go will not work.
+        </div>
+      </div>
+
+      <div class="property">
+        <div class="key">db.client.pkcs8.key</div>
+        <div class="mandatory">No</div>
+        <div class="default">client_pkcs8.key</div>
+        <div class="description">
+          PKCS8 encoded client key file. This should be placed in the Go Server's configuration directory. This file is required for a successful
+          connection to be established when trusted client certificates are used for authentication. OpenSSL can be used to create a PKCS8 encoded
+          file from a RSA key file using the below command:
+          <pre><code>openssl pkcs8 -topk8 -outform DER -in client.key -nocrypt >client_pkcs8.key</code></pre>
+        </div>
+      </div>
+
+      <div class="property">
+        <div class="key">db.backup.format</div>
+        <div class="mandatory">No</div>
+        <div class="default">custom</div>
+        <div class="description">
+          <%= link_to 'One Click Backup', 'http://www.go.cd/documentation/user/current/advanced_usage/one_click_backup.html' %> feature of Go backs
+          up both the configuration and database. By default, for servers using Postgres, the
+          <a href="http://www.postgresql.org/docs/current/static/backup-dump.html#BACKUP-DUMP-LARGE">custom</a> backup strategy provided by
+          <a href="http://www.postgresql.org/docs/current/static/app-pgdump.html">pg_dump</a> is used. The add-on can also be configured to take
+          plaintext backups by configuring setting the value of this property to "plain". In this case, pg_dump will be invoked with
+          <code>--format=plain --compress=6</code> as arguments. That causes it to take a plain text backup and compress it.
+        </div>
+      </div>
+    </div>
   </div>
 </section>
