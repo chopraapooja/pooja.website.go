@@ -48,9 +48,21 @@
     }
   }
 
+
+  $('[data-component=jumpScoll]').on('click', function() {
+    var $this = $(this),
+      target = $this.data('target');
+    if (!target) return;
+
+    $('html body').animate({
+      scrollTop: $(target).offset().top
+    }, 600);
+  });
+
   $window.on('scroll', function() {
     reposition();
   });
+
   $window.on('resize', function() {
     cachePosition = false;
     reposition();
