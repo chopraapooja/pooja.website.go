@@ -199,7 +199,6 @@ body.index {
     background-color: #f5f5f5;
     padding: 5vh 0;
 
-
     @include media($large-screen) {
       > .inner {
         display: flex;
@@ -212,6 +211,10 @@ body.index {
     > .inner {
       @include outer-container;
       padding: 0 5vh;
+    }
+
+    .text-content {
+      display: inline-block;
     }
 
     .support-icon {
