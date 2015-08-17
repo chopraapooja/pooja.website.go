@@ -99,7 +99,6 @@ header, footer {
   &.dark {
     .header-nav {
       background-color: $transparent-smoke;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 
       .logo {
         background-image: image-url('layout/go-logo.svg');

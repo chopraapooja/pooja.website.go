@@ -127,7 +127,7 @@ body.index {
       padding-bottom: 2em;
       @include media($medium-screen) {
         position: fixed;
-        bottom: 70vh;
+        top: $navigation-height + 8;
         left: 27vw;
         width: auto;
         z-index: -1;
