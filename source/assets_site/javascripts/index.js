@@ -4,7 +4,8 @@
     return;
   }
 
-  var $cards = $('.cards'),
+  var skr = skrollr.init(),
+    $cards = $('.cards'),
     $images = $cards.find('.images'),
     $window = $(window);
 
