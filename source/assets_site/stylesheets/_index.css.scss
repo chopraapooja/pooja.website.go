@@ -119,6 +119,22 @@ body.index {
 
   .section2 {
     @include title-styles;
+
+    .static-text {
+      font-weight: 600;
+      font-size: 1.1em;
+      text-transform: uppercase;
+      text-align: center;
+      padding-bottom: 2em;
+      @include media($medium-screen) {
+        position: fixed;
+        bottom: 70vh;
+        left: 20vw;
+        width: auto;
+        z-index: -1;
+      }
+    }
+
     > .inner {
       @include outer-container;
       padding: 3vh 0;
