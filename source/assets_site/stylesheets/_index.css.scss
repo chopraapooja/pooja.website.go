@@ -281,6 +281,16 @@ body.index {
           @include span-columns(4 of 12);
         }
 
+        .title {
+          height: 28px;
+          background: image_url("index/section4/pipeline.png") no-repeat center;
+          color: transparent;
+          @include media($medium-screen) {
+            background: none;
+            color: black;
+          }
+        }
+
         .addons-included {
           @include span-columns(4 of 12);
         }
