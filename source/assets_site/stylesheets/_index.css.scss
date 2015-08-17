@@ -121,15 +121,14 @@ body.index {
     @include title-styles;
 
     .static-text {
-      font-weight: 600;
-      font-size: 1.1em;
-      text-transform: uppercase;
+      font-weight: 300;
+      font-size: 2em;
       text-align: center;
       padding-bottom: 2em;
       @include media($medium-screen) {
         position: fixed;
         bottom: 70vh;
-        left: 20vw;
+        left: 27vw;
         width: auto;
         z-index: -1;
       }
@@ -259,6 +258,7 @@ body.index {
     @include title-styles;
     $container_width: 90%;
     position: relative;
+    padding: 5vh 0;
 
     > .inner {
       @include outer-container($container_width);
