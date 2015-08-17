@@ -12,6 +12,7 @@ set :fonts_dir, 'assets_site/fonts'
 set :css_dir, 'assets_site/stylesheets'
 set :js_dir, 'assets_site/javascripts'
 set :images_dir, 'assets_site/images'
+set :relative_links, true
 
 config[:file_watcher_ignore] += [ /.idea\// ]
 
